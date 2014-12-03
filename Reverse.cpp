@@ -18,16 +18,38 @@ struct ListNode {
 };
 
 // @include
-shared_ptr<ListNode<int>> ReverseLinkedList(
-    const shared_ptr<ListNode<int>>& head) {
-  if (!head || !head->next) {
-    return head;
-  }
-
-  auto new_head = ReverseLinkedList(head->next);
-  head->next->next = head;
-  head->next = nullptr;
-  return new_head;
+shared_ptr<ListNode<int>> ReverseLinkedList( shared_ptr<ListNode<int>> list ) {
+    // boundary condition: 
+    
+        
+    
+    // get first node
+    shared_ptr<ListNode<int>> first_node = list;
+    
+    // reverse nodes beyond first node
+    if (first_node->next->next != nullptr) {
+        shared_ptr<ListNode<int>> reversed_beyond_first = ReverseLinkedList(first_node->next);
+        shared_ptr<ListNode<int>> tmp = reversed_beyond_first;
+        
+        while (tmp->next != nullptr) {
+            //tmp2 = tmp;
+            tmp = tmp->next;
+        }
+        shared_ptr<ListNode<int>> last = tmp;
+            
+    
+        // reverse first node
+        last->next = first_node;
+        first_node->next = nullptr;
+    
+        return reversed_beyond_first;
+    }
+    else {
+        shared_ptr<ListNode<int>> output = first_node->next;
+        first_node->next->next = first_node;
+        first_node->next = nullptr;
+        return output;
+    }
 }
 // @exclude
 
