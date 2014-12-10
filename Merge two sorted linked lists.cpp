@@ -59,7 +59,7 @@ shared_ptr<ListNode<int>> MergeTwoSortedLists(shared_ptr<ListNode<int>> L,
             curr = curr->next;
         }
     }
-    if (opp->next)
+    if (opp)
         curr->next = opp;
 
     return head;
