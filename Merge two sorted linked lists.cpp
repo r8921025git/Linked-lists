@@ -32,24 +32,25 @@ Print(head->next);
 }
 
 int main(int argc, char* argv[]) {
-  shared_ptr<ListNode<int>> L1 =
-      make_shared<ListNode<int>>(ListNode<int>{1, nullptr});
-  shared_ptr<ListNode<int>> L2 =
-      make_shared<ListNode<int>>(ListNode<int>{2, nullptr});
+  shared_ptr<ListNode<int>> L1 ( new ListNode<int> );
+  L1->data = 1;   L1->next = nullptr;
+  shared_ptr<ListNode<int>> L2  ( new ListNode<int> );
+  L2->data = 3;   L2->next = nullptr;
   L1->next = L2;
-  shared_ptr<ListNode<int>> L3 =
-      make_shared<ListNode<int>>(ListNode<int>{3, nullptr});
+  shared_ptr<ListNode<int>> L3 ( new ListNode<int> );
+  L3->data = 5;   L3->next = nullptr;
   L2->next = L3;
+  
+  shared_ptr<ListNode<int>> R1 ( new ListNode<int> );
+  R1->data = 2;   R1->next = nullptr;
+  shared_ptr<ListNode<int>> R2  ( new ListNode<int> );
+  R2->data = 4;   R2->next = nullptr;
+  R1->next = R2;
+  shared_ptr<ListNode<int>> R3 ( new ListNode<int> );
+  R3->data = 6;   R3->next = nullptr;
+  R2->next = R3;  
 
-  cout << "before reverse" << endl;
   Print(L1);
-  shared_ptr<ListNode<int>> newhead = ReverseLinkedList(L1);
-  assert(newhead->data == 3 && newhead->next->data == 2 && newhead->next->next->data == 1);
-  cout << endl << "after reverse" << endl;
-  Print(newhead);
-  newhead = ReverseLinkedList(newhead);
-  assert(newhead->data == 1 && newhead->next->data == 2 && newhead->next->next->data == 3);
-  cout << endl << "after another reverse" << endl;
-  Print(newhead);
+  Print(R1);
   return 0;
 }
