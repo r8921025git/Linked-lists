@@ -17,10 +17,31 @@ T data;
 shared_ptr<ListNode<T>> next;
 };
 
-shared_ptr<ListNode<int>> MergeTwoSortedLists(shared_ptr<ListNode<int>> F,
-                                              shared_ptr<ListNode<int>> L) 
+shared_ptr<ListNode<int>> MergeTwoSortedLists(shared_ptr<ListNode<int>> L,
+                                              shared_ptr<ListNode<int>> R) 
 {
-
+    shared_ptr<ListNode<int>> head;
+    shared_ptr<ListNode<int>> curr;
+    shared_ptr<ListNode<int>> opp;
+    shared_ptr<ListNode<int>> tmp;
+    if (L->data < R->data) {
+        head = L;
+        curr = L;
+        opp  = R;
+    }
+    else {
+        head = R;
+        curr = R;
+        opp = L;
+    }
+    while (...) {
+        if (opp->data < curr->next->data) {
+            tmp = curr->next;
+            curr->next = opp;
+            curr->next->next = tmp;
+            opp = opp->next;
+        }
+    }
 
 }                        
 
