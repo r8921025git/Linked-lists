@@ -17,6 +17,15 @@ T data;
 shared_ptr<ListNode<T>> next;
 };
 
+void Print(shared_ptr<ListNode<int>> head) {
+    if (head) {
+        cout << "(" << head->data << ")";
+        Print(head->next);
+    } 
+    else
+        cout<<endl;
+}
+
 shared_ptr<ListNode<int>> MergeTwoSortedLists(shared_ptr<ListNode<int>> L,
                                               shared_ptr<ListNode<int>> R) 
 {
@@ -34,23 +43,28 @@ shared_ptr<ListNode<int>> MergeTwoSortedLists(shared_ptr<ListNode<int>> L,
         curr = R;
         opp = L;
     }
-    while (...) {
+    while (curr->next && opp->next) {
+        cout<<"In while loop, print head chain: ";
+        Print(head);
+        cout<<"In while loop, print opp chain: ";
+        Print(opp);
         if (opp->data < curr->next->data) {
             tmp = curr->next;
             curr->next = opp;
-            curr->next->next = tmp;
+            cout<<"opp->data ="<<opp->data<<endl;
             opp = opp->next;
+            curr->next->next = tmp;
+            curr = curr->next;
+        } else {
+            curr = curr->next;
         }
     }
+    if (opp->next)
+        curr->next = opp;
 
+    return head;
 }                        
 
-void Print(shared_ptr<ListNode<int>> head) {
-if (head) {
-cout << "(" << head->data << ")" << endl;
-Print(head->next);
-}
-}
 
 int main(int argc, char* argv[]) {
   shared_ptr<ListNode<int>> L1 ( new ListNode<int> );
@@ -73,5 +87,8 @@ int main(int argc, char* argv[]) {
 
   Print(L1);
   Print(R1);
+  shared_ptr<ListNode<int>> result = MergeTwoSortedLists(L1, R1);
+  cout<<"Result:"<<endl;
+  Print(result);
   return 0;
 }
